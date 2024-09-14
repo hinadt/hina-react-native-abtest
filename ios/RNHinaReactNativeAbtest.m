@@ -9,7 +9,7 @@
 //#endif
 //
 
-#if __has_include(<HinaCloudSDK/HinaCloudSDK.h>)
+#if __has_include(<HinaABTest/HinaABTest.h>)
 #import <HinaABTest/HinaABTest.h>
 #else
 #import "HinaABTest.h"
@@ -31,6 +31,7 @@ RCT_EXPORT_MODULE(RNHinaReactNativeAbtest)
 //RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(init:(NSString *)url){
+    NSLog(@"[RNHinaABTest] init========");
     @try {
         HinaABTestConfigOptions *abtestConfigOptions = [[HinaABTestConfigOptions alloc] initWithURL:url];
         [HinaABTest startWithConfigOptions:abtestConfigOptions];
