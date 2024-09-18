@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
   s.platform     = :ios, "9.0"
-  s.source       = { :git => "https://github.com/hinadt/hina-react-native-abtest.git"}
+  s.source       = { :git => "https://github.com/hinadt/hina-react-native-abtest.git" }
   # s.source_files  = "RNHinaReactNativeAbtest/**/*.{h,m}"
   s.source_files = "ios/*.{h,m}"
   s.requires_arc = true

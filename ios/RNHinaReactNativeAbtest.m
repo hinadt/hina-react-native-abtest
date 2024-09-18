@@ -2,13 +2,6 @@
 #error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag on this file.
 #endif
 
-//#if __has_include(<HinaCloudSDK/HinaCloudSDK.h>)
-//#import <HinaCloudSDK/HinaCloudSDK.h>
-//#else
-//#import "HinaCloudSDK.h"
-//#endif
-//
-
 #if __has_include(<HinaABTest/HinaABTest.h>)
 #import <HinaABTest/HinaABTest.h>
 #else
@@ -21,6 +14,11 @@
 
 @implementation RNHinaReactNativeAbtest
 
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
 RCT_EXPORT_MODULE(RNHinaReactNativeAbtest)
 
 //
@@ -30,8 +28,17 @@ RCT_EXPORT_MODULE(RNHinaReactNativeAbtest)
 //}
 //RCT_EXPORT_MODULE()
 
+
+//RCT_EXPORT_METHOD(trackAppInstall:(NSDictionary *)property) {
+//    @try {
+//        [[HinaCloudSDK sharedInstance] trackInstallation:@"H_AppInstall" withProperties:property];
+//    } @catch (NSException *exception) {
+//        NSLog(@"[RNHinaCloud] error:%@",exception);
+//    }
+//}
+
 RCT_EXPORT_METHOD(init:(NSString *)url){
-    NSLog(@"[RNHinaABTest] init========");
+    NSLog(@"[RNHinaABTest] init==\n url=%@",url);
     @try {
         HinaABTestConfigOptions *abtestConfigOptions = [[HinaABTestConfigOptions alloc] initWithURL:url];
         [HinaABTest startWithConfigOptions:abtestConfigOptions];
@@ -40,7 +47,9 @@ RCT_EXPORT_METHOD(init:(NSString *)url){
     }
 }
 
-RCT_EXPORT_METHOD(fetchCacheABTest:(NSDictionary *)params (RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+
+RCT_EXPORT_METHOD(fetchCacheABTest:(NSDictionary *)params resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+    NSLog(@"[RNHinaABTest] fetchCacheABTest==\n params=%@",params);
     @try {
         NSString *paramName = params[@"paramName"];
         id defaultValue = params[@"defaultValue"];
@@ -51,7 +60,8 @@ RCT_EXPORT_METHOD(fetchCacheABTest:(NSDictionary *)params (RCTPromiseResolveBloc
     }
 }
 
-RCT_EXPORT_METHOD(asyncFetchABTest:(NSDictionary *)params (RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(asyncFetchABTest:(NSDictionary *)params resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+    NSLog(@"[RNHinaABTest] asyncFetchABTest==\n params=%@",params);
     @try {
         NSString *paramName = params[@"paramName"];
         id defaultValue = params[@"defaultValue"];
@@ -64,7 +74,8 @@ RCT_EXPORT_METHOD(asyncFetchABTest:(NSDictionary *)params (RCTPromiseResolveBloc
     }
 }
 
-RCT_EXPORT_METHOD(fastFetchABTest:(NSDictionary *)params (RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(fastFetchABTest:(NSDictionary *)params resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+    NSLog(@"[RNHinaABTest] fastFetchABTest==\n params=%@",params);
     @try {
         NSString *paramName = params[@"paramName"];
         id defaultValue = params[@"defaultValue"];
